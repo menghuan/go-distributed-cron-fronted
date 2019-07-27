@@ -11,9 +11,9 @@ const tokens = {
 const users = {
   'admin-token': {
     roles: ['admin'],
-    introduction: 'I am a super administrator',
+    introduction: 'Golang分布式任务调度平台',
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    name: 'Super Admin'
+    name: 'Golang分布式任务调度平台'
   },
   'editor-token': {
     roles: ['editor'],
