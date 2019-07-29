@@ -8,7 +8,7 @@
         <el-input v-model="form.command"  placeholder="shell命令"  prop="command"/>
       </el-form-item>
       <el-form-item label="cron表达式">
-        <el-input v-model="form.cronExpr" placeholder="秒 分 时 天 月 周"  prop="cronExpr"/>
+        <el-input v-model="form.cronExpr" placeholder="秒 分 时 天 月 周（* * * * * *）"  prop="cronExpr"/>
       </el-form-item>
       <el-form-item label="任务备注">
         <el-input
@@ -21,7 +21,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">保存</el-button>
+        <el-button type="primary" @click="onSubmit('form')">保存</el-button>
         <el-button @click="onCancel">取消</el-button>
       </el-form-item>
     </el-form>
@@ -54,8 +54,8 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
-      this.$refs['form'].validate((valid) => {
+    onSubmit(form) {
+      this.$refs[form].validate((valid) => {
         if (!valid) {
           return false
         }
@@ -64,7 +64,7 @@ export default {
     },
     save() {
       jobService.save(this.form, () => {
-        this.$router.push('/joblist')
+        this.$router.push('/job/list')
         this.$message('提交成功!')
       })
     },

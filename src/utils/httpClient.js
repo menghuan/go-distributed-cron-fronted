@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import router from '../router/index'
-import store from '../store/index'
+import Qs from 'qs'
 
 const errorMessage = '加载失败, 请稍后再试'
 // 成功状态码
@@ -25,12 +25,12 @@ axios.interceptors.response.use(data => {
   return Promise.reject(error)
 })
 
-function handle (promise, next) {
+function handle(promise, next) {
   promise.then((res) => successCallback(res, next))
     .catch((error) => failureCallback(error))
 }
 
-function checkResponseCode (code, msg) {
+function checkResponseCode(code, msg) {
   switch (code) {
     // 应用未安装
     case APP_NOT_INSTALL_CODE:
@@ -51,7 +51,7 @@ function checkResponseCode (code, msg) {
   return true
 }
 
-function successCallback (res, next) {
+function successCallback(res, next) {
   if (!checkResponseCode(res.data.code, res.data.message)) {
     return
   }
@@ -61,7 +61,7 @@ function successCallback (res, next) {
   next(res.data.data, res.data.code, res.data.message)
 }
 
-function failureCallback (error) {
+function failureCallback(error) {
   Message.error({
     message: '请求失败 - ' + error
   })
@@ -96,10 +96,10 @@ export default {
   },
 
   post(uri, data, next) {
-    const promise = axios.post(uri, JSON.stringify(data), {
+    const promise = axios.post(uri, Qs.stringify(data), {
       headers: {
         post: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/x-www-form-urlencoded'
         }
       }
     })
