@@ -18,7 +18,7 @@
     <!--</el-pagination>-->
     <el-table
       v-loading="jobsLoading"
-      :data="jobs"
+      :data="jobslist"
       element-loading-text="Loading"
       border
       fit
@@ -68,7 +68,7 @@ import jobService from '../../api/job'
 export default {
   data() {
     return {
-      jobs: [],
+      jobslist: [],
       jobsTotal: 0,
       searchParams: {
         page_size: 200,
@@ -103,7 +103,7 @@ export default {
     fetchData(callback = null) {
       // this.jobs = '{"errno":0,"msg":"success","data":[{"name":"job2","command":"echo hello2","cronExpr":"*/5  * * * * * *"},{"name":"job3","command":"echo hello3","cronExpr":"*/5  * * * * * *"},{"name":"job4","command":"echo hello4","cronExpr":"*/5  * * * * * *"},{"name":"job5","command":"echo hello5","cronExpr":"*/5  * * * * * *"},{"name":"job6","command":"echo hello6","cronExpr":"*/5  * * * * * *"},{"name":"job7","command":"echo hello7","cronExpr":"*/2  * * * * * *"},{"name":"job8","command":"echo hello8","cronExpr":"*/2  * * * * * *"}]}'
       jobService.list(this.searchParams, (jobs) => {
-        this.jobs = jobs.data
+        this.jobslist = jobs.data
         if (callback) {
           callback()
         }

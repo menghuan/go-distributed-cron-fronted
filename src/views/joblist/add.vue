@@ -64,7 +64,7 @@ export default {
     },
     save() {
       jobService.save(this.form, () => {
-        this.$router.push('/job/list')
+        this.$router.push('/jobmanage/index')
         this.$message('提交成功!')
       })
     },

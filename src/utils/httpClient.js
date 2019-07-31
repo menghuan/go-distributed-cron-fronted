@@ -52,13 +52,13 @@ function checkResponseCode(code, msg) {
 }
 
 function successCallback(res, next) {
-  if (!checkResponseCode(res.data.code, res.data.message)) {
+  if (!checkResponseCode(res.data.errno, res.data.msg)) {
     return
   }
   if (!next) {
     return
   }
-  next(res.data.data, res.data.code, res.data.message)
+  next(res.data.data, res.data.errno, res.data.msg)
 }
 
 function failureCallback(error) {
@@ -86,7 +86,7 @@ export default {
     axios.all(requests).then(axios.spread(function(...res) {
       const result = []
       for (let item of res) {
-        if (!checkResponseCode(item.data.code, item.data.message)) {
+        if (!checkResponseCode(item.data.errno, item.data.msg)) {
           return
         }
         result.push(item.data.data)
