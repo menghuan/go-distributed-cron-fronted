@@ -24,11 +24,11 @@
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="ID" width="95">
-        <template slot-scope="scope">
-          {{ scope.$index }}
-        </template>
-      </el-table-column>
+      <!--<el-table-column align="center" label="ID" width="95">-->
+        <!--<template slot-scope="scope">-->
+          <!--{{ scope.$index }}-->
+        <!--</template>-->
+      <!--</el-table-column>-->
       <el-table-column label="任务名称" width="150" align="center">
         <template slot-scope="scope">
           {{ scope.row.name }}
@@ -44,7 +44,7 @@
           {{ scope.row.cronExpr }}
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="任务操作" width="430" align="center">
+      <el-table-column class-name="status-col" label="任务操作" width="500" align="center">
         <template slot-scope="scope">
           <el-row>
             <el-button type="primary" @click="editJob(scope.row.name)">编辑</el-button>
@@ -103,7 +103,7 @@ export default {
     fetchData(callback = null) {
       // this.jobs = '{"errno":0,"msg":"success","data":[{"name":"job2","command":"echo hello2","cronExpr":"*/5  * * * * * *"},{"name":"job3","command":"echo hello3","cronExpr":"*/5  * * * * * *"},{"name":"job4","command":"echo hello4","cronExpr":"*/5  * * * * * *"},{"name":"job5","command":"echo hello5","cronExpr":"*/5  * * * * * *"},{"name":"job6","command":"echo hello6","cronExpr":"*/5  * * * * * *"},{"name":"job7","command":"echo hello7","cronExpr":"*/2  * * * * * *"},{"name":"job8","command":"echo hello8","cronExpr":"*/2  * * * * * *"}]}'
       jobService.list(this.searchParams, (jobs) => {
-        this.jobslist = jobs.data
+        this.jobslist = jobs
         if (callback) {
           callback()
         }
@@ -135,7 +135,7 @@ export default {
     },
     // 跳转任务日志
     jumpToLog(item) {
-      this.$router.push(`/job/log?name=${item}`)
+      this.$router.push(`/jobmanage/log?name=${item}`)
     },
     // 刷新列表
     refresh() {
@@ -147,9 +147,9 @@ export default {
     editJob(item) {
       let path = ''
       if (item === null) {
-        path = '/job/add'
+        path = '/jobmanage/add'
       } else {
-        path = `/job/add/${item}`
+        path = `/jobmanage/add?name=${item}`
       }
       this.$router.push(path)
     }

@@ -33,6 +33,40 @@ Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
 
+Vue.directive('focus', {
+  inserted: function(el) {
+    // 聚焦元素
+    el.focus()
+  }
+})
+
+Vue.prototype.$appConfirm = function(callback) {
+  this.$confirm('确定执行此操作?', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(() => {
+    callback()
+  })
+}
+
+Vue.filter('formatTime', function(time) {
+  const fillZero = function(num) {
+    return num >= 10 ? num : '0' + num
+  }
+  const date = new Date(time)
+  const result = date.getFullYear() + '-' +
+      (fillZero(date.getMonth() + 1)) + '-' +
+      fillZero(date.getDate()) + ' ' +
+      fillZero(date.getHours()) + ':' +
+      fillZero(date.getMinutes()) + ':' +
+      fillZero(date.getSeconds())
+  if (result.indexOf('20') !== 0) {
+    return ''
+  }
+  return result
+})
+
 new Vue({
   el: '#app',
   router,

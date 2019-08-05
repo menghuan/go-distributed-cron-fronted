@@ -14,17 +14,17 @@
             fit
             highlight-current-row
     >
-      <el-table-column align="center" label="ID" width="95">
-        <template slot-scope="scope">
-          {{ scope.$index }}
-        </template>
-      </el-table-column>
-      <el-table-column label="任务名称" width="100" align="center">
+      <!--<el-table-column align="center" label="ID" width="95">-->
+        <!--<template slot-scope="scope">-->
+          <!--{{ scope.$index }}-->
+        <!--</template>-->
+      <!--</el-table-column>-->
+      <el-table-column label="任务名称" width="160" align="center">
         <template slot-scope="scope">
           {{ scope.row.JobName }}
         </template>
       </el-table-column>
-      <el-table-column label="shell命令" width="130" align="center">
+      <el-table-column label="shell命令" width="160" align="center">
         <template slot-scope="scope">
           {{ scope.row.Command }}
         </template>
@@ -89,7 +89,7 @@ export default {
     // 获取任务列表数据
     fetchData(callback = null) {
       jobService.log(this.searchParams, (logs) => {
-        this.logs = logs.data
+        this.logs = logs
         if (callback) {
           callback()
         }

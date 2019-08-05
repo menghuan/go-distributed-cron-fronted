@@ -50,7 +50,7 @@ export default {
     // 获取任务列表数据
     fetchData(callback = null) {
       workService.list(this.searchParams, (workers) => {
-        this.workers = workers.data
+        this.workers = workers
         if (callback) {
           callback()
         }
