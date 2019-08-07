@@ -47,12 +47,8 @@
       <el-table-column class-name="status-col" label="任务操作" width="500" align="center">
         <template slot-scope="scope">
           <el-row>
-            <el-button type="primary" @click="editJob(scope.row.name)">编辑</el-button>
+            <el-button type="primary" @click="editJob(scope.row.name, scope.row.command, scope.row.cronExpr)">编辑</el-button>
             <el-button type="danger" @click="deleteJob(scope.row.name)">删除</el-button>
-          </el-row>
-          <br>
-          <el-row>
-            <el-button type="success" @click="runJob(scope.row.name)">手动执行</el-button>
             <el-button type="danger" @click="killJob(scope.row.name)">强杀</el-button>
             <el-button type="info" @click="jumpToLog(scope.row.name)">查看日志</el-button>
           </el-row>
@@ -144,12 +140,12 @@ export default {
       })
     },
     // 修改任务
-    editJob(item) {
+    editJob(name, command, cronExpr) {
       let path = ''
-      if (item === null) {
+      if (name === null || command === null || cronExpr === null) {
         path = '/jobmanage/add'
       } else {
-        path = `/jobmanage/add?name=${item}`
+        path = `/jobmanage/add?name=${name}&command=${command}&cronExpr=${cronExpr}`
       }
       this.$router.push(path)
     }

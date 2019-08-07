@@ -53,6 +53,17 @@ export default {
       }
     }
   },
+  created() {
+    if (this.$route.query.name) {
+      this.form.name = this.$route.query.name
+    }
+    if (this.$route.query.command) {
+      this.form.command = this.$route.query.command
+    }
+    if (this.$route.query.cronExpr) {
+      this.form.cronExpr = this.$route.query.cronExpr
+    }
+  },
   methods: {
     onSubmit(form) {
       this.$refs[form].validate((valid) => {

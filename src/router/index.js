@@ -79,6 +79,12 @@ export const constantRoutes = [
         name: 'Table',
         component: () => import('@/views/joblist/index'),
         meta: { title: '任务列表', icon: 'table' }
+      },
+      {
+        path: 'log',
+        name: 'Table',
+        component: () => import('@/views/joblist/log'),
+        meta: { title: '任务日志', icon: 'table' }
       }
     ]
   },
