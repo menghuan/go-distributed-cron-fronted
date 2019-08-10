@@ -44,13 +44,21 @@
           {{ scope.row.cronExpr }}
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="任务操作" width="500" align="center">
+      <el-table-column label="任务备注" width="200" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.remark }}
+        </template>
+      </el-table-column>
+      <el-table-column class-name="status-col" label="任务操作" width="300" align="center">
         <template slot-scope="scope">
           <el-row>
-            <el-button type="primary" @click="editJob(scope.row.name, scope.row.command, scope.row.cronExpr)">编辑</el-button>
+            <el-button type="primary" @click="editJob(scope.row.name, scope.row.command, scope.row.cronExpr, scope.row.remark)">编辑</el-button>
             <el-button type="danger" @click="deleteJob(scope.row.name)">删除</el-button>
+          </el-row>
+          <br>
+          <el-row>
             <el-button type="danger" @click="killJob(scope.row.name)">强杀</el-button>
-            <el-button type="info" @click="jumpToLog(scope.row.name)">查看日志</el-button>
+            <el-button type="info" @click="jumpToLog(scope.row.name)">日志</el-button>
           </el-row>
         </template>
       </el-table-column>
@@ -140,12 +148,12 @@ export default {
       })
     },
     // 修改任务
-    editJob(name, command, cronExpr) {
+    editJob(name, command, cronExpr, remark) {
       let path = ''
-      if (name === null || command === null || cronExpr === null) {
+      if (name === null || command === null || cronExpr === null || remark === null) {
         path = '/jobmanage/add'
       } else {
-        path = `/jobmanage/add?name=${name}&command=${command}&cronExpr=${cronExpr}`
+        path = `/jobmanage/add?name=${name}&command=${command}&cronExpr=${cronExpr}&remark=${remark}`
       }
       this.$router.push(path)
     }

@@ -21,7 +21,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="onSubmit('form')">保存</el-button>
+        <el-button type="primary" @click="onSubmit">保存</el-button>
         <el-button @click="onCancel">取消</el-button>
       </el-form-item>
     </el-form>
@@ -37,7 +37,8 @@ export default {
       form: {
         name: '',
         command: '',
-        cronExpr: ''
+        cronExpr: '',
+        remark: ''
       },
       formRules: {
         name: [
@@ -49,6 +50,9 @@ export default {
         ],
         command: [
           { required: true, message: '请输入命令', trigger: 'blur' }
+        ],
+        remark: [
+          { required: true, message: '请输入备注', trigger: 'blur' }
         ]
       }
     }
@@ -63,10 +67,13 @@ export default {
     if (this.$route.query.cronExpr) {
       this.form.cronExpr = this.$route.query.cronExpr
     }
+    if (this.$route.query.remark) {
+      this.form.remark = this.$route.query.remark
+    }
   },
   methods: {
-    onSubmit(form) {
-      this.$refs[form].validate((valid) => {
+    onSubmit() {
+      this.$refs['form'].validate((valid) => {
         if (!valid) {
           return false
         }
